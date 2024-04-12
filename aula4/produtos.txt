@@ -1,0 +1,6 @@
+Parafuso 2.5;12;8.7
+Chave de fenda;12;5.2
+Cimento 20kg;215;31.9
+Arame farpado;125;4.9
+Quadro;20;10.0
+Teste;35;2.5

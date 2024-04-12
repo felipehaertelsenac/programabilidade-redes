@@ -1,0 +1,3 @@
+Felipe;5.0;Reprovado
+Romulo;8.0;Aprovado
+João;8.5;Aprovado
