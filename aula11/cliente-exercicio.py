@@ -23,18 +23,62 @@ def inclusao():
     retorno = cliente.recv(2048).decode()
 
     if retorno == '1':
-        print("Acesso cadastro com sucesso!")
+        print("Acesso cadastrado com sucesso!")
     else:
         print('Erro no cadastramento no servidor!')
 
 def pesquisaIP():
-    return True
+    ip = input('Qual IP pesquisar: ')
+
+    mensagem = f"2;{ip}"
+
+    cliente.send(mensagem.encode())
+
+    retorno = cliente.recv(4096).decode()
+
+    if retorno == '0':
+        print('IP não consta na lista de acessos')
+    else:
+        linhas = retorno.split('#')
+
+        print('Numero: Site:.................: Data.....: Hora...:')
+
+        numeroLinha = 0
+
+        for linha in linhas:
+            numeroLinha += 1
+            partes = linha.split(';')
+            print(f'{numeroLinha:7d} {partes[0]:23s} {partes[1]} {partes[2][:-1]}')
+
+    # site;data;hora# site;data;hora# site;data;hora
 
 def pesquisaAcessos():
-    return True
+    site = input('Endereço do site: ')
+
+    mensagem = f'3;{site}'
+
+    cliente.send(mensagem.encode())
+
+    retorno = cliente.recv(1024).decode()
+
+    if retorno == '0':
+        print('Site não acessado')
+    else:
+        print(f'Site acessado {retorno} vezes')
 
 def excluir():
-    return True
+    data = input('Data: ')
+
+    mensagem = f'4;{data}'
+
+    cliente.send(mensagem.encode())
+
+    retorno = cliente.recv(1024).decode()
+
+    if retorno == '0':
+        print('Não foi excluído')
+    else:
+        print(f'Os logs do dia {data} foram excluídos')
 
 while True:
     titulo('Menu Principal - Controle de Logs')
